@@ -1,0 +1,51 @@
+// C++ code
+//
+int POT1 = 0;
+
+int POT2 = 0;
+
+int BOT1 = 0;
+
+void setup()
+{
+  pinMode(A0, INPUT);
+  pinMode(A1, INPUT);
+  pinMode(7, INPUT);
+  pinMode(9, OUTPUT);
+  pinMode(10, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(3, OUTPUT);
+}
+
+void loop()
+{
+  POT1 = map(analogRead(A0), 0, 1023, 1, 10);
+  POT2 = map(analogRead(A1), 0, 1023, 1, 3);
+  BOT1 = digitalRead(7);
+  if (BOT1 == 1) {
+    digitalWrite(9, HIGH);
+    digitalWrite(10, HIGH);
+    if (POT2 == 1) {
+      digitalWrite(6, HIGH);
+      digitalWrite(5, LOW);
+      digitalWrite(3, LOW);
+    }
+    if (POT2 == 2) {
+      digitalWrite(6, HIGH);
+      digitalWrite(5, HIGH);
+      digitalWrite(3, LOW);
+    }
+    if (POT2 == 3) {
+      digitalWrite(6, HIGH);
+      digitalWrite(5, HIGH);
+      digitalWrite(3, HIGH);
+    }
+    delay(1000 * POT1); // Wait for 1000 * POT1 millisecond(s)
+    digitalWrite(10, LOW);
+    digitalWrite(9, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(3, LOW);
+  }
+}
